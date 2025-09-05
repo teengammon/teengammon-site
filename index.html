@@ -14,6 +14,7 @@
       --accent: #000000;
       --ring: rgba(15, 23, 42, 0.2);
       --title: #7595FF; /* custom sky blue */
+      --link: #7595FF;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -22,7 +23,8 @@
         --muted: #a1a8b3;
         --accent: #ffffff;
         --ring: rgba(230, 231, 235, 0.25);
-        --title: #60a5fa; /* lighter blue for dark mode */
+        --title: #91AAFF; /* lighter sky blue for dark mode */
+        --link: #91AAFF;
       }
     }
 
@@ -35,6 +37,8 @@
       text-align: center;
       padding: 10vh 18px;
     }
+
+    a { color: var(--link); }
 
     h1 {
       font-size: clamp(48px, 12vw, 96px);
