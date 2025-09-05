@@ -115,8 +115,13 @@
   <p class="tagline">A new backgammon meet-up for teens in NYC.</p>
   <p class="details">Our first casual tournament is coming up this fall in Brooklyn Bridge Park — bring a friend, all levels welcome. Enter your email below and we’ll send the details.</p>
 
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form id="signup" action="https://formspree.io/f/mzzakjny" method="POST">
+    <!-- Formspree will email this to hi@teengammon.com once you set the endpoint -->
     <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+    <!-- Optional: subject line for the email you receive -->
+    <input type="hidden" name="_subject" value="New Teengammon signup" />
+    <!-- Honeypot to reduce spam bots -->
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true" />
     <button type="submit">Join the list</button>
   </form>
 
@@ -125,5 +130,28 @@
   <footer>
     Questions? Email <a href="mailto:hi@teengammon.com">hi@teengammon.com</a>
   </footer>
+  <script>
+    // Keep users on the page and show a friendly message after submit
+    (function(){
+      const form = document.getElementById('signup');
+      if(!form) return;
+      form.addEventListener('submit', async function(e){
+        if(form.action.includes('YOUR_FORM_ID')) return; // Allow normal submit until endpoint is added
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }});
+          if(res.ok){
+            alert('Thanks — you’re on the list!');
+            form.reset();
+          } else {
+            alert('Hmm, something went wrong. Please try again.');
+          }
+        } catch(err){
+          alert('Network error — please try again.');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
