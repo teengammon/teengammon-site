@@ -5,31 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TEENGAMMON</title>
   <meta name="description" content="A new backgammon meet‑up for teens in NYC. Join the list to get updates." />
-  <!-- Open Graph for nice link previews -->
-  <meta property="og:title" content="TEENGAMMON" />
-  <meta property="og:description" content="A new backgammon meet‑up for teens in NYC. Join the list to get updates." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://teengammon.com" />
-  <meta property="og:image" content="/og-image.jpg" />
-  <link rel="icon" href="/favicon.ico" />
 
-  <!-- College‑style headline font (easy to swap later) -->
-  <link href="https://fonts.googleapis.com/css2?family=Graduate&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <!-- Keep original bold/impact style font -->
   <style>
     :root {
       --bg: #fafafa;
-      --card: #ffffff;
       --text: #0f172a; /* slate-900 */
       --muted: #475569; /* slate-600 */
-      --accent: #000000; /* black button */
+      --accent: #000000;
       --ring: rgba(15, 23, 42, 0.2);
-      --radius: 16px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0b0b0c;
-        --card: #111113;
         --text: #e6e7eb;
         --muted: #a1a8b3;
         --accent: #ffffff;
@@ -38,69 +26,50 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      display: grid;
-      place-items: center;
-      padding: 4dvh 18px;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 720px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: clamp(20px, 4vw, 36px);
-      box-shadow: 0 8px 24px -12px var(--ring);
-      border: 1px solid rgba(0,0,0,0.06);
+      text-align: center;
+      padding: 10vh 18px;
     }
 
     h1 {
-      font-family: Graduate, Impact, "Arial Black", system-ui, sans-serif;
-      font-weight: 700;
-      line-height: 1;
-      text-align: center;
-      margin: 0 0 14px;
-      letter-spacing: 1px;
-      font-size: clamp(40px, 9vw, 88px);
+      font-size: clamp(48px, 12vw, 96px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      font-family: Impact, "Arial Black", sans-serif;
+      line-height: 1.1;
     }
 
     .tagline {
-      text-align: center;
-      margin: 0 auto 22px;
-      max-width: 60ch;
-      font-size: clamp(16px, 2.7vw, 20px);
+      font-size: clamp(18px, 3.5vw, 22px);
+      margin: 0 auto 16px;
+      max-width: 600px;
       color: var(--muted);
     }
 
     .details {
-      text-align: center;
-      margin: 0 auto 26px;
-      font-size: clamp(15px, 2.4vw, 18px);
+      font-size: clamp(16px, 3vw, 20px);
+      margin: 0 auto 24px;
+      max-width: 600px;
     }
 
     form {
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       max-width: 560px;
       margin: 0 auto;
     }
 
-    label { display: none; }
-
     input[type="email"] {
-      width: 100%;
-      font: inherit;
-      padding: 14px 14px;
-      border-radius: 12px;
+      flex: 1 1 250px;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 8px;
       border: 1px solid rgba(0,0,0,0.12);
       background: transparent;
       color: inherit;
@@ -112,101 +81,43 @@
     }
 
     button[type="submit"] {
-      padding: 14px 18px;
-      border-radius: 12px;
-      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
       font-weight: 700;
-      cursor: pointer;
+      border-radius: 8px;
+      border: none;
       background: var(--accent);
       color: #fff;
-      transition: transform 0.02s ease-in;
+      cursor: pointer;
     }
-    button[type="submit"]:active { transform: translateY(1px); }
 
     .fineprint {
       margin-top: 12px;
-      text-align: center;
       color: var(--muted);
       font-size: 13px;
     }
-
-    .success, .error {
-      margin-top: 14px;
-      text-align: center;
-      font-weight: 600;
-      display: none;
-    }
-    .success { color: #16a34a; }
-    .error   { color: #dc2626; }
 
     footer {
-      text-align: center;
-      margin-top: 18px;
-      color: var(--muted);
+      margin-top: 30px;
       font-size: 13px;
-    }
-
-    /* Make the form stack nicely on small screens */
-    @media (max-width: 520px) {
-      form { grid-template-columns: 1fr; }
-      button[type="submit"] { width: 100%; }
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="title">
-      <h1 id="title">TEENGAMMON</h1>
-      <p class="tagline">A new backgammon meet‑up for teens in NYC.</p>
-      <p class="details">Our first casual game night is coming up soon — bring a friend, all levels welcome. Pop your email below and we’ll send the details.</p>
+  <h1>TEENGAMMON</h1>
+  <p class="tagline">A new backgammon meet‑up for teens in NYC.</p>
+  <p class="details">Our first casual game night is coming up soon — bring a friend, all levels welcome. Pop your email below and we’ll send the details.</p>
 
-      <!-- Replace the action URL with your Formspree endpoint. Example: https://formspree.io/f/abcde123 -->
-      <form id="signup" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <label for="email">Email address</label>
-        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
-        <button type="submit" aria-label="Join the email list">Join the list</button>
-      </form>
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+    <button type="submit">Join the list</button>
+  </form>
 
-      <p class="fineprint">We’ll only email about Teengammon meet‑ups. Unsubscribe anytime.</p>
-      <div id="msg-success" class="success" role="status" aria-live="polite">Thanks — you’re on the list! Check your inbox.</div>
-      <div id="msg-error" class="error" role="status" aria-live="polite">Hmm, something went wrong. Please try again.</div>
-    </section>
+  <p class="fineprint">We’ll only email about Teengammon meet‑ups. Unsubscribe anytime.</p>
 
-    <footer>
-      Questions? Email <a href="mailto:hi@teengammon.com">hi@teengammon.com</a>
-    </footer>
-  </main>
-
-  <!-- Optional: handle Formspree submission via fetch to stay on-page -->
-  <script>
-    (function(){
-      const form = document.getElementById('signup');
-      const success = document.getElementById('msg-success');
-      const error = document.getElementById('msg-error');
-      form.addEventListener('submit', async (e) => {
-        // If the action still has the placeholder, let the browser try a normal POST
-        if (form.action.includes('YOUR_FORM_ID')) return;
-        e.preventDefault();
-        success.style.display = 'none';
-        error.style.display = 'none';
-        try {
-          const data = new FormData(form);
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: data
-          });
-          if (res.ok) {
-            success.style.display = 'block';
-            form.reset();
-          } else {
-            error.style.display = 'block';
-          }
-        } catch (err) {
-          error.style.display = 'block';
-        }
-      });
-    })();
-  </script>
+  <footer>
+    Questions? Email <a href="mailto:hi@teengammon.com">hi@teengammon.com</a>
+  </footer>
 </body>
 </html>
