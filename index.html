@@ -7,6 +7,13 @@
   <meta name="description" content="A new backgammon meet-up for teens in NYC. Join the list to get updates." />
 
   <style>
+    @font-face {
+      font-family: 'College Block';
+      src: url('fonts/CollegeBlock.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     :root {
       --bg: #fafafa;
       --text: #0f172a; /* slate-900 */
@@ -42,9 +49,9 @@
 
     h1 {
       font-size: clamp(48px, 12vw, 96px);
-      font-weight: 900;
+      font-family: 'College Block', sans-serif;
+      font-weight: normal;
       margin-bottom: 20px;
-      font-family: Impact, "Arial Black", sans-serif;
       line-height: 1.1;
       color: var(--title);
     }
@@ -103,6 +110,15 @@
       font-size: 13px;
     }
 
+    .status {
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      min-height: 1.2em; /* reserve space to avoid layout shift */
+    }
+    .status.success { color: #16a34a; }
+    .status.error { color: #dc2626; }
+
     footer {
       margin-top: 30px;
       font-size: 13px;
@@ -116,39 +132,50 @@
   <p class="details">Our first casual tournament is coming up this fall in Brooklyn Bridge Park — bring a friend, all levels welcome. Enter your email below and we’ll send the details.</p>
 
   <form id="signup" action="https://formspree.io/f/mzzakjny" method="POST">
-    <!-- Formspree will email this to hi@teengammon.com once you set the endpoint -->
     <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
-    <!-- Optional: subject line for the email you receive -->
     <input type="hidden" name="_subject" value="New Teengammon signup" />
-    <!-- Honeypot to reduce spam bots -->
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true" />
     <button type="submit">Join the list</button>
   </form>
+  <div id="status" class="status" aria-live="polite"></div>
 
   <p class="fineprint">We’ll only email about Teengammon meet-ups. Unsubscribe anytime.</p>
 
   <footer>
     Questions? Email <a href="mailto:hi@teengammon.com">hi@teengammon.com</a>
   </footer>
+
   <script>
-    // Keep users on the page and show a friendly message after submit
+    // Inline success/error instead of alert popups
     (function(){
       const form = document.getElementById('signup');
-      if(!form) return;
+      const statusEl = document.getElementById('status');
+      if(!form || !statusEl) return;
+
       form.addEventListener('submit', async function(e){
-        if(form.action.includes('YOUR_FORM_ID')) return; // Allow normal submit until endpoint is added
+        if(form.action.includes('YOUR_FORM_ID')) return;
         e.preventDefault();
-        const data = new FormData(form);
+        statusEl.textContent = '';
+        statusEl.className = 'status';
+
         try {
-          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }});
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
           if(res.ok){
-            alert('Thanks — you’re on the list!');
+            statusEl.textContent = "Thanks — you’re on the list!";
+            statusEl.classList.add('success');
             form.reset();
           } else {
-            alert('Hmm, something went wrong. Please try again.');
+            statusEl.textContent = "Hmm, something went wrong. Please try again.";
+            statusEl.classList.add('error');
           }
         } catch(err){
-          alert('Network error — please try again.');
+          statusEl.textContent = "Network error — please try again.";
+          statusEl.classList.add('error');
         }
       });
     })();
